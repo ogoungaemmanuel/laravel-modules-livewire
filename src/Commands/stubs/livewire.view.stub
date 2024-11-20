@@ -1,0 +1,13 @@
+@section('page_title',  __('About Us'))
+@section('content')
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            <div>
+                <h3>[quote]</h3>
+            </div>
+
+        </div>
+    </div>
+</div>
+@include('backend::layouts.header.footerbar')

@@ -1,0 +1,45 @@
+{
+  "name": "xslain/laravel-modules-livewire",
+  "description": "Using Laravel Livewire in Laravel Modules package with automatically registered livewire components for every modules.",
+  "keywords": [
+    "laravel",
+    "modules",
+    "module",
+    "laravel-modules",
+    "laravel-module",
+    "custom-modules",
+    "custom-module",
+    "livewire",
+    "laravel-livewire",
+    "nwidart",
+    "xslain"
+  ],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Mehediul Hassan Miton",
+      "email": "xslain.dev@gmail.com",
+      "role": "Developer"
+    }
+  ],
+  "type": "library",
+  "require": {
+    "php": ">=8.1",
+    "laravel/framework": "^10.0|^11.0",
+    "livewire/livewire": "^3.0"
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "xslain\\LaravelModulesLivewire\\LaravelModulesLivewireServiceProvider"
+      ]
+    }
+  },
+  "autoload": {
+    "psr-4": {
+      "xslain\\LaravelModulesLivewire\\": "src/"
+    }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}
