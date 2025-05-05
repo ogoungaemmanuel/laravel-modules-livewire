@@ -24,8 +24,8 @@ trait CommandHelper
 
     protected function ensureDirectoryExists($path)
     {
-        if (! File::isDirectory(dirname($path))) {
-            File::makeDirectory(dirname($path), 0777, $recursive = true, $force = true);
+        if (! File::isDirectory(dirname((string) $path))) {
+            File::makeDirectory(dirname((string) $path), 0777, $recursive = true, $force = true);
         }
     }
 

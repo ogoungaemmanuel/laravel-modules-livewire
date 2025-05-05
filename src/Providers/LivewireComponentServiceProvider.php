@@ -45,7 +45,7 @@ class LivewireComponentServiceProvider extends ServiceProvider
 
         $modulesLivewireNamespace = config('modules-livewire.namespace', 'Livewire');
 
-        $modules->each(function ($module) use ($modulesLivewireNamespace) {
+        $modules->each(function ($module) use ($modulesLivewireNamespace): void {
             $directory = (string) Str::of($module->getPath())
                 ->append('/'.$modulesLivewireNamespace)
                 ->replace(['\\'], '/');
@@ -68,7 +68,7 @@ class LivewireComponentServiceProvider extends ServiceProvider
 
         $modules = collect(config('modules-livewire.custom_modules', []));
 
-        $modules->each(function ($module, $moduleName) {
+        $modules->each(function ($module, $moduleName): void {
             $moduleLivewireNamespace = $module['namespace'] ?? config('modules-livewire.namespace', 'Livewire');
 
             $directory = (string) Str::of($module['path'] ?? '')
@@ -92,20 +92,16 @@ class LivewireComponentServiceProvider extends ServiceProvider
         }
 
         collect($filesystem->allFiles($directory))
-            ->map(function (SplFileInfo $file) use ($namespace) {
-                return (string) Str::of($namespace)
-                    ->append('\\', $file->getRelativePathname())
-                    ->replace(['/', '.php'], ['\\', '']);
-            })
-            ->filter(function ($class) {
-                return is_subclass_of($class, Component::class) && ! (new ReflectionClass($class))->isAbstract();
-            })
-            ->each(function ($class) use ($namespace, $aliasPrefix) {
+            ->map(fn(SplFileInfo $file) => (string) Str::of($namespace)
+                ->append('\\', $file->getRelativePathname())
+                ->replace(['/', '.php'], ['\\', '']))
+            ->filter(fn($class) => is_subclass_of($class, Component::class) && ! (new ReflectionClass($class))->isAbstract())
+            ->each(function ($class) use ($namespace, $aliasPrefix): void {
                 $alias = $aliasPrefix.Str::of($class)
                     ->after($namespace.'\\')
                     ->replace(['/', '\\'], '.')
                     ->explode('.')
-                    ->map([Str::class, 'kebab'])
+                    ->map(Str::kebab(...))
                     ->implode('.');
 
                 if (Str::endsWith($class, ['\Index', '\index'])) {

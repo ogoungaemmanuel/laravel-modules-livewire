@@ -15,7 +15,7 @@ class Decomposer
             $composer = (new Filesystem())->get(base_path('composer.json'));
 
             return collect(json_decode($composer, true));
-        } catch (\Exception $e) {
+        } catch (\Exception) {
             return collect([]);
         }
     }

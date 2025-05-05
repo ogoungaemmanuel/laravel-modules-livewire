@@ -36,7 +36,7 @@ trait ComponentParser
 
         $this->directories = collect(
             preg_split('/[.\/(\\\\)]+/', $this->argument('component'))
-        )->map([Str::class, 'studly']);
+        )->map(Str::studly(...));
 
         $this->component = $this->getComponent();
 
@@ -91,7 +91,7 @@ trait ComponentParser
         $moduleLivewireViewDir = $this->getModuleLivewireViewDir();
 
         $path = $this->directories
-            ->map([Str::class, 'kebab'])
+            ->map(Str::kebab(...))
             ->implode('/');
 
         if ($this->option('view')) {
@@ -192,7 +192,7 @@ trait ComponentParser
     protected function getComponentTag()
     {
         $directoryAsView = $this->directories
-            ->map([Str::class, 'kebab'])
+            ->map(Str::kebab(...))
             ->implode('.');
 
         $tag = "<livewire:{$this->getModuleLowerName()}::{$directoryAsView} />";
